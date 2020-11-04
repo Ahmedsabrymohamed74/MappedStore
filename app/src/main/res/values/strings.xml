@@ -15,5 +15,6 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Full name</string>
     <string name="btn_maps">To Maps</string>
+    <string name="map_key" translatable="false">AIzaSyBoRthIM-zK0vyAXfZ6R0GnyVjx-uNmhYw</string>
 
 </resources>

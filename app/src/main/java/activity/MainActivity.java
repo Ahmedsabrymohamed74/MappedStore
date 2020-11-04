@@ -62,6 +62,15 @@ public class MainActivity extends Activity {
                 logoutUser();
             }
         });
+
+        //ToMaps Activity
+        btnMaps.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                toLocation();
+            }
+        });
     }
 
     /**
@@ -77,5 +86,15 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void toLocation(){
+        session.setLogin(false);
+
+        //Launching Maps activity
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }
