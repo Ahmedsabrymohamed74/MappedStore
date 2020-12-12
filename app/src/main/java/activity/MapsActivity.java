@@ -65,6 +65,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.addMarker(markerOptions);
 
+        double lat_usr = currentLocation.getLatitude();
+        double long_usr = currentLocation.getLongitude();
+
+
     }
 
     @Override

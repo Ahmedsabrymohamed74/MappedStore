@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
     private TextView txtName;
     private TextView txtEmail;
     private Button btnLogout;
-    private Button btnMaps;
+    private Button btnProducts;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
         btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnMaps = (Button) findViewById(R.id.btn_maps);
+        btnProducts = (Button) findViewById(R.id.btn_products);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -63,12 +63,12 @@ public class MainActivity extends Activity {
             }
         });
 
-        //ToMaps Activity
-        btnMaps.setOnClickListener(new View.OnClickListener() {
+        //ToProducts Activity
+        btnProducts.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                toLocation();
+                toProductList();
             }
         });
     }
@@ -93,6 +93,16 @@ public class MainActivity extends Activity {
 
         //Launching Maps activity
         Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    private void toProductList(){
+        session.setLogin(false);
+
+        //Launching List activity
+        Intent intent = new Intent(MainActivity.this, ListActivity.class);
         startActivity(intent);
         finish();
 

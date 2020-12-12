@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MappedStore" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MappedStore"
+        parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +13,44 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
+
+        <style name="DescriptiveRegularTextTheme">
+            <item name="android:textSize">@dimen/secondary_text_size</item>
+            <item name="android:textColor">#ff808080</item>
+            <item name="android:textStyle">normal</item>
+        </style>
+
+        <style name="TertiaryTextTheme">
+            <item name="android:textSize">@dimen/tertiary_text_size</item>
+            <item name="android:textColor">@color/black</item>
+            <item name="android:textStyle">normal</item>
+        </style>
+
+        <style name="SecondaryTextTheme">
+            <item name="android:textSize">@dimen/secondary_text_size</item>
+            <item name="android:textColor">@color/black</item>
+            <item name="android:textStyle">normal</item>
+        </style>
+
+
+        <style name="TitleTextTheme">
+            <item name="android:textSize">@dimen/title_size</item>
+            <item name="android:textColor">@color/black</item>
+        </style>
+
+
+        <style name="BoldTitleTextTheme">
+            <item name="android:textSize">@dimen/title_size</item>
+            <item name="android:textColor">@color/black</item>
+            <item name="android:textStyle">bold</item>
+        </style>
+
+        <style name="ListTitleTheme">
+            <item name="android:textSize">@dimen/list_title_size</item>
+            <item name="android:textColor">@color/black</item>
+            <item name="android:textStyle">bold</item>
+        </style>
+
 </resources>
