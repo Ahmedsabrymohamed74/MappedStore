@@ -36,21 +36,21 @@ public class DetailActivity extends AppCompatActivity {
     public RecyclerView.LayoutManager manager;
     public RecyclerView.Adapter mAdapter;
     public List<Product> products;
-    private static final String BASE_URL = "http://196.157.67.181:8080/android_api/json.php";
+    private static final String BASE_URL = "http://102.44.129.30:8080/android_api/json.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Toolbar mToolbar = findViewById(R.id.toolbar);
+//        Toolbar mToolbar = findViewById(R.id.toolbar);
 //        progressBar = findViewById(R.id.progressbar);
-        setSupportActionBar(mToolbar);
+//        setSupportActionBar(mToolbar);
         ActionBar mActionBar = getSupportActionBar();
 
 //        recyclerView = findViewById(R.id.products_recyclerView);
         manager = new GridLayoutManager(DetailActivity.this, 2);
-        recyclerView.setLayoutManager(manager);
+//        recyclerView.setLayoutManager(manager);
         products = new ArrayList<>();
 
         getProducts();
@@ -75,9 +75,7 @@ public class DetailActivity extends AppCompatActivity {
                                 double price = object.getDouble("price");
                                 String specialOffers = object.getString("specialOffers");
 
-                                String rate = String.valueOf(price);
-                                float newRate = Float.parseFloat(rate);
-
+                                
                                 Product product = new Product(shopName, productName, price, specialOffers);
                                 products.add(product);
 
@@ -127,7 +125,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
                 Toast.makeText(DetailActivity.this, error.toString(), Toast.LENGTH_LONG).show();
 
             }

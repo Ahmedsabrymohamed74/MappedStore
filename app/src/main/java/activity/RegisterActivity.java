@@ -170,7 +170,7 @@ public class RegisterActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
 //                Toast.makeText(RegisterActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }

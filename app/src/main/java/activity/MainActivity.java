@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     private TextView txtEmail;
     private Button btnLogout;
     private Button btnProducts;
+    private Button btnMaps;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -33,6 +34,7 @@ public class MainActivity extends Activity {
         txtEmail = (TextView) findViewById(R.id.email);
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnProducts = (Button) findViewById(R.id.btn_products);
+        btnMaps = (Button) findViewById(R.id.btn_maps);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -40,31 +42,39 @@ public class MainActivity extends Activity {
         // session manager
         session = new SessionManager(getApplicationContext());
 
-        if (!session.isLoggedIn()) {
-            logoutUser();
-        }
+//        if (!session.isLoggedIn()) {
+//            logoutUser();
+//        }
 
         // Fetching user details from sqlite
-        HashMap<String, String> user = db.getUserDetails();
+//        HashMap<String, String> user = db.getUserDetails();
 
-        String name = user.get("name");
-        String email = user.get("email");
+//        String name = user.get("name");
+//        String email = user.get("email");
 
         // Displaying the user details on the screen
-        txtName.setText(name);
-        txtEmail.setText(email);
+//        txtName.setText(name);
+//        txtEmail.setText(email);
 
         // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+
+//            @Override
+//            public void onClick(View v) {
+//                logoutUser();
+//            }
+//        });
+
+//        ToProducts Activity
+        btnProducts.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                logoutUser();
+                toProductList();
             }
         });
 
-        //ToProducts Activity
-        btnProducts.setOnClickListener(new View.OnClickListener() {
+        btnMaps.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -103,6 +113,16 @@ public class MainActivity extends Activity {
 
         //Launching List activity
         Intent intent = new Intent(MainActivity.this, ListActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    private void toMaps(){
+        session.setLogin(false);
+
+        //Launching Maps activity
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
         startActivity(intent);
         finish();
 

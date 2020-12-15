@@ -1,7 +1,9 @@
 package activity;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.mappedstore.*;
 import com.example.mappedstore.R;
 
 import java.util.ArrayList;
@@ -31,18 +35,42 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_list, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_detail, parent, false);
         return new MyViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-    }
 
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        final Product product = products.get(position);
+
+        holder.mPrice.setText("EGP " + product.getPrice());
+//        holder.mPrice.setPrice(product.getPrice());
+        holder.mShopName.setText(product.getShopName());
+//        Glide.with(mContext).load(product.getProductName()).into(holder.mproductNameView);
+
+        holder.mContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(mContext, DetailActivity.class);
+
+                intent.putExtra("shopName", product.getShopName());
+                intent.putExtra("productName", product.getProductName());
+                intent.putExtra("price", product.getPrice());
+                intent.putExtra("specialOffers", product.getSpecialOffers());
+
+                mContext.startActivity(intent);
+
+            }
+        });
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -64,33 +92,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 //            mContainer = view.findViewById(R.id.product_container);
         }
     }
-
-//    @Override
-//    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//
-//        final Product product = products.get(position);
-//
-//        holder.mPrice.setText("Ksh "+product.getPrice());
-//        holder.mPrice.setprice(product.getPrice());
-//        holder.mShopName.setText(product.getShopName());
-//        Glide.with(mContext).load(product.getProductName()).into(holder.mproductNameView);
-//
-//        holder.mContainer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(mContext,DetailedProductsActivity.class);
-//
-//                intent.putExtra("shopName",product.getShopName());
-//                intent.putExtra("productName",product.getProductName());
-//                intent.putExtra("price", product.getPrice());
-//                intent.putExtra("specialOffers",product.getSpecialOffers()());
-//
-//                mContext.startActivity(intent);
-//
-//            }
-//        });
-//    }
 
 //    @Override
 //    public int getItemCount() {
