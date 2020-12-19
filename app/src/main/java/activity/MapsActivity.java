@@ -22,12 +22,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 
 
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    Location currentLocation;
-
-    FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
+    Location currentLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

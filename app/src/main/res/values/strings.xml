@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+<!--Milestone 1-->
     <string name="app_name">Mapped Store</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -16,21 +16,17 @@
     <string name="name">Full name</string>
     <string name="btn_maps">To Maps</string>
 
+<!--Milestone 2-->
     <string name="btn_product">Products List</string>
     <string name="store">Store: </string>
     <string name="product_name">Product Name: </string>
+    <string name="shop_name">Shop Name: </string>
     <string name="products">Products</string>
-    <string name="price">Price: </string>
-    <string name="distance">Distance: </string>
     <string name="description">Description</string>
+    <string name="special_offers">Special Offers: Get Wireless Bluetooth Speaker for free </string>
     <string name="location">Locations: </string>
-    <string name="btn_carre">Carrefour Cairo Festival City</string>
-    <string name="btn_radio">Radio Shack</string>
-    <string name="btn_btech">B.Tech</string>
-    <string name="btn_2b">2B Computer</string>
-    <string name="btn_sam">Samsung Brand Shop</string>
-    <string name="btn_lg">LG</string>
     <string name="item">Item 1</string>
+    <string name="price_distance">Price: 6500, Distance: 9.2 Km</string>
     <string name="map_key" translatable="false">AIzaSyC64Orh7q6wThlM0rIWyOcjA8s7q5GUy8A</string>
 
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:contextClickable="true"
+            android:focusable="false"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/shopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/shop_name"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/price_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shopName"
+                android:layout_alignStart="@+id/shopName"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/price_distance"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/specialOffers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price_distance"
+                android:layout_alignStart="@+id/shopName"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/special_offers"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

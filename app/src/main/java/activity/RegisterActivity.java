@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.mappedstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,8 +26,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.android.volley.toolbox.Volley;
-import com.example.mappedstore.R;
 import app.AppConfig;
 import app.AppController;
 import helper.SQLiteHandler;
@@ -110,7 +110,7 @@ public class RegisterActivity extends Activity {
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
-     * */
+     */
     private void registerUser(final String name, final String email, final String password, final String number, final String address) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
@@ -125,7 +125,7 @@ public class RegisterActivity extends Activity {
             public void onResponse(String response) {
                 Log.d(TAG, "Register Response: " + response.toString());
                 hideDialog();
-                Log.i("tagconvertstr", "["+response+"]");
+                Log.i("tagconvertstr", "[" + response + "]");
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
@@ -170,7 +170,7 @@ public class RegisterActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Registration Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
 //                Toast.makeText(RegisterActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }

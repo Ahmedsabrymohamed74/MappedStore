@@ -15,6 +15,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mappedstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.mappedstore.R;
 import app.AppConfig;
 import app.AppController;
 import helper.SQLiteHandler;
@@ -102,7 +102,7 @@ public class LoginActivity extends Activity {
 
     /**
      * function to verify login details in mysql db
-     * */
+     */
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";

@@ -1,94 +1,71 @@
 package activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mappedstore.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class    ListActivity extends Activity implements AdapterView.OnItemClickListener{
-    android.widget.ListView listView;
-
-    String[] product_name = {"Huawei MatePad T8 Tablet", "Samsung Galaxy S20 Dual SIM", "Samsung Smart TV", "LG Smart TV"};
-    String[] description = {"8 Inch, 16 GB, 2 GB RAM", "128GB, 8GB RAM, 4G LTE", "55 Inch 4K Ultra HD Smart LED TV with Built-in Receiver", "43 Inch Smart LED Full HD TV With Built In Receiver - 43Lm6300"};
-    int[] images = {R.drawable.huawei_matepad_tablet, R.drawable.samsung_galaxy_s20, R.drawable.samsung_smart_tv, R.drawable.lg_smart_tv};
+import java.util.ArrayList;
+import java.util.List;
 
 
-    Toolbar toolbar;
+public class ListActivity extends Activity implements AdapterView.OnItemClickListener {
+    private static final String PRODUCT_URL = "http://192.168.1.5:8080/android_api/jsonlist.php";
+
+    List<Product> productList;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        listView = findViewById(R.id.listView);
-        toolbar = findViewById(R.id.productlist);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        productList = new ArrayList<>();
+        loadProducts();
 
-        toolbar.setTitle(R.string.products);
-        MyAdapter adapter = new MyAdapter(this, product_name, description, images);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
+    }
 
+    private void loadProducts() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, PRODUCT_URL, response -> {
+            try {
+                JSONArray products = new JSONArray(response);
+
+                for (int i = 0; i < products.length(); i++) {
+                    JSONObject productObject = products.getJSONObject(i);
+                    String name = productObject.getString("name");
+                    String description = productObject.getString("description");
+                    String image_url = productObject.getString("image_url");
+                    Product product = new Product(name, description, image_url);
+                    productList.add(product);
+                }
+                ProductAdapter adapter = new ProductAdapter(ListActivity.this, productList);
+                recyclerView.setAdapter(adapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> Toast.makeText(ListActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show());
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        Intent intent = new Intent(ListActivity.this, DetailActivity.class);
-
-        intent.putExtra("productName", product_name[position]);
-        intent.putExtra("prodcutImage", images[position]);
-        intent.putExtra("description", description[position]);
-        startActivity(intent);
-    }
-
-
-    class MyAdapter extends ArrayAdapter<String> {
-
-        Context context;
-        String[] rName;
-        int[] rImgs;
-        String[] rDescription;
-
-        MyAdapter(Context c, String[] product_name, String[] description, int[] imgs) {
-            super(c, R.layout.row, R.id.textView1, product_name);
-            this.context = c;
-            this.rName = product_name;
-            this.rImgs = imgs;
-            this.rDescription = description;
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row = layoutInflater.inflate(R.layout.row, parent, false);
-            ImageView images = row.findViewById(R.id.image);
-            TextView myTitle = row.findViewById(R.id.textView1);
-            myTitle.setText(rName[position]);
-//            TextView rDescription = row.findViewById(R.id.textView1);
-
-            images.setImageResource(rImgs[position]);
-            myTitle.setText(rName[position]);
-
-            return row;
-        }
-    }
-
-    public void onClick(View v) {
 
     }
 }

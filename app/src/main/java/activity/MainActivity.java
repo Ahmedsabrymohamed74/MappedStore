@@ -1,18 +1,19 @@
 package activity;
 
 
-import helper.SQLiteHandler;
-import helper.SessionManager;
-
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.example.mappedstore.R;
+
+import java.util.HashMap;
+
+import helper.SQLiteHandler;
+import helper.SessionManager;
 
 public class MainActivity extends Activity {
 
@@ -42,28 +43,28 @@ public class MainActivity extends Activity {
         // session manager
         session = new SessionManager(getApplicationContext());
 
-//        if (!session.isLoggedIn()) {
-//            logoutUser();
-//        }
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
 
         // Fetching user details from sqlite
-//        HashMap<String, String> user = db.getUserDetails();
+        HashMap<String, String> user = db.getUserDetails();
 
-//        String name = user.get("name");
-//        String email = user.get("email");
+        String name = user.get("name");
+        String email = user.get("email");
 
         // Displaying the user details on the screen
-//        txtName.setText(name);
-//        txtEmail.setText(email);
+        txtName.setText(name);
+        txtEmail.setText(email);
 
         // Logout button click event
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
 
-//            @Override
-//            public void onClick(View v) {
-//                logoutUser();
-//            }
-//        });
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
 
 //        ToProducts Activity
         btnProducts.setOnClickListener(new View.OnClickListener() {
@@ -74,19 +75,29 @@ public class MainActivity extends Activity {
             }
         });
 
+        //  Maps Activity
         btnMaps.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                toProductList();
+                toMaps();
             }
         });
+
+
+//        btnMaps.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                toMaps();
+//            }
+//        });
     }
 
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared
      * preferences Clears the user data from sqlite users table
-     * */
+     */
     private void logoutUser() {
         session.setLogin(false);
 
@@ -98,18 +109,8 @@ public class MainActivity extends Activity {
         finish();
     }
 
-    private void toLocation(){
-        session.setLogin(false);
 
-        //Launching Maps activity
-        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
-
-    private void toProductList(){
-        session.setLogin(false);
+    private void toProductList() {
 
         //Launching List activity
         Intent intent = new Intent(MainActivity.this, ListActivity.class);
@@ -118,8 +119,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private void toMaps(){
-        session.setLogin(false);
+    private void toMaps() {
 
         //Launching Maps activity
         Intent intent = new Intent(MainActivity.this, MapsActivity.class);
@@ -127,4 +127,6 @@ public class MainActivity extends Activity {
         finish();
 
     }
+
+
 }

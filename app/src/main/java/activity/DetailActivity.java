@@ -1,165 +1,88 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.mappedstore.R;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class DetailActivity extends AppCompatActivity {
-
-    private ProgressBar progressBar;
-    public RecyclerView recyclerView;
-    public RecyclerView.LayoutManager manager;
-    public RecyclerView.Adapter mAdapter;
-    public List<Product> products;
-    private static final String BASE_URL = "http://102.44.129.30:8080/android_api/json.php";
+    private static final String PRODUCT_SHOP_URL = "http://192.168.1.5/LoginRegister/product_shop.php";
+    TextView productName, productDescription;
+    ImageView productImage;
+    List<Shop> shopList;
+    RecyclerView recyclerView;
+    String specialOffers;
+    double price, latitude, longitude;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        Intent intent = getIntent();
+        name = intent.getExtras().getString("productName");
+        String description = intent.getExtras().getString("productDescription");
+        String image_url = intent.getExtras().getString("image_url");
 
-//        Toolbar mToolbar = findViewById(R.id.toolbar);
-//        progressBar = findViewById(R.id.progressbar);
-//        setSupportActionBar(mToolbar);
-        ActionBar mActionBar = getSupportActionBar();
+        productName = findViewById(R.id.productName);
+        productDescription = findViewById(R.id.productDescription);
+        productImage = findViewById(R.id.productImage);
 
-//        recyclerView = findViewById(R.id.products_recyclerView);
-        manager = new GridLayoutManager(DetailActivity.this, 2);
-//        recyclerView.setLayoutManager(manager);
-        products = new ArrayList<>();
+        productName.setText(name);
+        productDescription.setText(description);
+        Glide.with(getApplicationContext()).load(image_url).into(productImage);
 
-        getProducts();
+        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        shopList = new ArrayList<>();
+        loadShops();
+
 
     }
 
-    private void getProducts() {
+    private void loadShops() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, PRODUCT_SHOP_URL + "?param1=" + productName, response -> {
+            try {
+                JSONArray productShops = new JSONArray(response);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, BASE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
+                for (int i = 0; i < productShops.length(); i++) {
+                    JSONObject productShop = productShops.getJSONObject(i);
+                    name = productShop.getString("name");
+                    price = productShop.getDouble("price");
+                    specialOffers = productShop.getString("specialOffers");
+                    latitude = productShop.getDouble("latitude");
+                    longitude = productShop.getDouble("longitude");
 
-                            JSONArray array = new JSONArray(response);
-                            for (int i = 0; i < array.length(); i++) {
+                    Shop shopFinal = new Shop(name, price, specialOffers, latitude, longitude);
+                    shopList.add(shopFinal);
+                }
+                ShopAdapter adapter = new ShopAdapter(DetailActivity.this, shopList);
+                recyclerView.setAdapter(adapter);
 
-                                JSONObject object = array.getJSONObject(i);
-
-                                String shopName = object.getString("shopName");
-                                String productName = object.getString("productName");
-                                double price = object.getDouble("price");
-                                String specialOffers = object.getString("specialOffers");
-
-                                
-                                Product product = new Product(shopName, productName, price, specialOffers);
-                                products.add(product);
-
-                                if(shopName.equals("Carrefour Cairo Fistival City")){
-                                  double carre_lat =  30.029968;
-                                  double carre_long = 31.40869;
-
-                                }
-
-                                if(shopName.equals("RadioShack")){
-                                    double radio_lat =  30.004335;
-                                    double radio_long = 31.424731;
-                                }
-
-                                if(shopName.equals("B.Tech")){
-                                    double btech_lat =  30.006426;
-                                    double btech_long = 31.425114;
-                                }
-
-                                if(shopName.equals("2B Computer")){
-                                    double twob_lat =  30.025149;
-                                    double radio_long = 31.489566;
-                                }
-
-                                if(shopName.equals("Samsung Brand Shop")){
-                                    double radio_lat =  30.045507;
-                                    double radio_long = 31.409397;
-                                }
-
-                                if(shopName.equals("LG")){
-                                    double radio_lat =  30.065566;
-                                    double radio_long = 31.348285;
-                                }
-
-
-                            }
-
-                        } catch (Exception e) {
-
-                        }
-
-                        mAdapter = new RecyclerAdapter(DetailActivity.this, products);
-                        recyclerView.setAdapter(mAdapter);
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-//                progressBar.setVisibility(View.GONE);
-                Toast.makeText(DetailActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-
-        Volley.newRequestQueue(DetailActivity.this).add(stringRequest);
-
-    }
-
-    public double CalculationByDistance(LatLng StartP, LatLng EndP) {
-        int Radius = 6371;  // radius of earth in Km
-        double lat1 = StartP.latitude; //current user lat
-        double lat2 = EndP.latitude;
-        double lon1 = StartP.longitude; //current user long
-        double lon2 = EndP.longitude;
-        double dLat = Math.toRadians(lat2 - lat1);
-        double dLon = Math.toRadians(lon2 - lon1);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-                + Math.cos(Math.toRadians(lat1))
-                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
-                * Math.sin(dLon / 2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-        double valueResult = Radius * c;
-        double km = valueResult / 1;
-        DecimalFormat newFormat = new DecimalFormat("####");
-        int kmInDec = Integer.valueOf(newFormat.format(km));
-        double meter = valueResult % 1000;
-        int meterInDec = Integer.valueOf(newFormat.format(meter));
-        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
-                + " Meter   " + meterInDec);
-
-        return Radius * c;
+        }, error -> Toast.makeText(DetailActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show());
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
 }
-
-

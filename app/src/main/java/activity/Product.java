@@ -1,47 +1,26 @@
 package activity;
 
 public class Product {
-    private String shopName, productName, specialOffers;
-    private double price;
+    private final String name;
+    private final String description;
+    private final String image_url;
 
-    public Product(String shopName, String productName, double price, String specialOffers) {
-
-        this.shopName = shopName;
-        this.productName = productName;
-        this.specialOffers = specialOffers;
-        this.price = price;
+    public Product(String name, String description, String image_url) {
+        this.name = name;
+        this.description = description;
+        this.image_url = image_url;
     }
 
 
-    public String getShopName() {
-        return shopName;
+    public String getName() {
+        return name;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public String getDescription() {
+        return description;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getSpecialOffers() {
-        return specialOffers;
-    }
-
-    public void setSpecialOffers(String specialOffers) {
-        this.specialOffers = specialOffers;
+    public String getImage_url() {
+        return image_url;
     }
 }
