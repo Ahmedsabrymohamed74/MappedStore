@@ -42,7 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Glide.with(mCtx).load(product.getImage_url()).into(holder.imageView);
         holder.relativeLayout.setOnClickListener(v -> {
             Intent intent = new Intent(mCtx, DetailActivity.class);
-//                intent.putExtra("product_id",product.getProduct_id());
+            intent.putExtra("product_id", product.getProduct_id());
             intent.putExtra("productName", product.getName());
             intent.putExtra("productDescription", product.getDescription());
             intent.putExtra("image_url", product.getImage_url());
