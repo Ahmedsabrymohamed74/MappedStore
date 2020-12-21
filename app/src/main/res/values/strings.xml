@@ -7,12 +7,12 @@
     <string name="hint_name">Full name</string>
     <string name="hint_number">Phone Number</string>
     <string name="hint_address">Address</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_register">REGISTER</string>
-    <string name="btn_link_to_register">Not a member? Sign up now.</string>
-    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_link_to_register">Not a member? Register Here.</string>
+    <string name="btn_link_to_login">Already Registered? Log In.</string>
     <string name="welcome">Welcome</string>
-    <string name="btn_logout">LOGOUT</string>
+    <string name="btn_logout">Logout</string>
     <string name="name">Full name</string>
     <string name="btn_maps">To Maps</string>
 
@@ -20,6 +20,7 @@
     <string name="btn_product">Products List</string>
     <string name="store">Store: </string>
     <string name="product_name">Product Name: </string>
+    <string name="app_logo">App Logo</string>
     <string name="shop_name">Shop Name: </string>
     <string name="products">Products</string>
     <string name="description">Description</string>
@@ -27,6 +28,8 @@
     <string name="location">Locations: </string>
     <string name="item">Item 1</string>
     <string name="price_distance">Price: 6500, Distance: 9.2 Km</string>
+    <string name="btn_link_to_main">Back to Main Screen</string>
+
     <string name="map_key" translatable="false">AIzaSyC64Orh7q6wThlM0rIWyOcjA8s7q5GUy8A</string>
 
 </resources>

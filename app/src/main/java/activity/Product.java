@@ -1,4 +1,5 @@
 package activity;
+
 public class Product {
     private int product_id;
     private String name;

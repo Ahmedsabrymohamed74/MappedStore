@@ -1,6 +1,9 @@
 package activity;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,9 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
-    private static final String PRODUCT_URL = "http://192.168.1.13:8080/android_api/jsonlist.php";
+    private static final String PRODUCT_URL = "http://192.168.1.8:8080/android_api/jsonlist.php";
     List<Product> productList;
     RecyclerView recyclerView;
+    private Button btnLinkToMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,18 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         productList = new ArrayList<>();
         loadProducts();
+
+        btnLinkToMain = (Button) findViewById(R.id.btnLinkToMainScreen);
+
+        btnLinkToMain.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 

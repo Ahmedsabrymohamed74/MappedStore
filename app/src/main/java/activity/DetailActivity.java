@@ -2,6 +2,7 @@ package activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,19 +28,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-    private static final String PRODUCT_SHOP_URL = "http://192.168.1.13:8080/android_api/json.php";
+    private static final String PRODUCT_SHOP_URL = "http://192.168.1.8:8080/android_api/json.php";
     TextView productName, productDescription;
-    Button sortPriceBtn, sortDistanceBtn;
     ImageView productImage;
     List<Shop> shopList;
     RecyclerView recyclerView;
     int shop_id;
-    String shopName, specialOffers;
+    String specialOffers;
     double price, latitude, longitude;
     private int product_id;
     private String name;
     private String description;
     private String image_url;
+    private Button btnLinkToMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,18 @@ public class DetailActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         shopList = new ArrayList<>();
         loadShops();
+
+        btnLinkToMain = (Button) findViewById(R.id.btnLinkToMainScreen);
+
+        btnLinkToMain.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
 
     }

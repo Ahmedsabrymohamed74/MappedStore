@@ -2,18 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_register"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/bg_register"
         android:layout_margin="5dp">
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/bg_register"
             android:clickable="true"
             android:contextClickable="true"
             android:focusable="false"
@@ -25,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/shop_name"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -35,21 +37,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/shopName"
                 android:layout_alignStart="@+id/shopName"
+                android:textColor="@color/white"
+
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/price_distance"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/specialOffers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/price_distance"
+                android:textColor="@color/white"
+
                 android:layout_alignStart="@+id/shopName"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/special_offers"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
         </RelativeLayout>
 

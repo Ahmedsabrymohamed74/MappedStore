@@ -25,6 +25,10 @@ public class Shop {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -37,16 +41,12 @@ public class Shop {
         return latitude;
     }
 
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 
     public void setLongitude(double longitude) {
