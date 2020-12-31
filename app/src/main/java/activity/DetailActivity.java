@@ -25,7 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import helper.SQLiteHandler;
+import helper.SessionManager;
 
 public class DetailActivity extends AppCompatActivity {
     private static final String PRODUCT_SHOP_URL = "http://192.168.1.8:8080/android_api/json.php";
@@ -36,11 +40,14 @@ public class DetailActivity extends AppCompatActivity {
     int shop_id;
     String specialOffers;
     double price, latitude, longitude;
+    String email;
     private int product_id;
     private String name;
     private String description;
     private String image_url;
     private Button btnLinkToMain;
+    private SQLiteHandler db;
+    private SessionManager session;
 
 
     @Override
@@ -61,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
         productDescription.setText(description);
         Glide.with(getApplicationContext()).load(image_url).into(productImage);
 
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,6 +87,17 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // session manager
+        session = new SessionManager(getApplicationContext());
+
+
+        // Fetching user details from sqlite
+        HashMap<String, String> user = db.getUserDetails();
+
+        email = user.get("email");
 
     }
 
@@ -101,7 +120,7 @@ public class DetailActivity extends AppCompatActivity {
                         Shop shopFinal = new Shop(shop_id, name, price, specialOffers, latitude, longitude);
                         shopList.add(shopFinal);
                     }
-                    ShopAdapter adapter = new ShopAdapter(DetailActivity.this, shopList);
+                    ShopAdapter adapter = new ShopAdapter(DetailActivity.this, shopList, email, product_id);
                     recyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {

@@ -27,8 +27,7 @@ public class ListActivity extends AppCompatActivity {
     private static final String PRODUCT_URL = "http://192.168.1.8:8080/android_api/jsonlist.php";
     List<Product> productList;
     RecyclerView recyclerView;
-    private Button btnLinkToMain;
-
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class ListActivity extends AppCompatActivity {
         productList = new ArrayList<>();
         loadProducts();
 
-        btnLinkToMain = (Button) findViewById(R.id.btnLinkToMainScreen);
+        Button btnLinkToMain = (Button) findViewById(R.id.btnLinkToMainScreen);
 
         btnLinkToMain.setOnClickListener(new View.OnClickListener() {
 
@@ -71,7 +70,7 @@ public class ListActivity extends AppCompatActivity {
                         Product product = new Product(product_id, name, description, image_url);
                         productList.add(product);
                     }
-                    ProductAdapter adapter = new ProductAdapter(ListActivity.this, productList);
+                    ProductAdapter adapter = new ProductAdapter(ListActivity.this, productList, email);
                     recyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {

@@ -20,10 +20,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private final Context mCtx;
     private final List<Product> productList;
+    private String email;
 
-    public ProductAdapter(Context mCTx, List<Product> productList) {
+    public ProductAdapter(Context mCTx, List<Product> productList, String email) {
         this.mCtx = mCTx;
         this.productList = productList;
+        this.email = email;
     }
 
     @NonNull
@@ -40,14 +42,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.textViewName.setText(product.getName());
         holder.textViewDescription.setText(product.getDescription());
         Glide.with(mCtx).load(product.getImage_url()).into(holder.imageView);
-        holder.relativeLayout.setOnClickListener(v -> {
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             Intent intent = new Intent(mCtx, DetailActivity.class);
-            intent.putExtra("product_id", product.getProduct_id());
-            intent.putExtra("productName", product.getName());
-            intent.putExtra("productDescription", product.getDescription());
-            intent.putExtra("image_url", product.getImage_url());
+            intent.putExtra("email",email);
+            intent.putExtra("product_id",product.getProduct_id());
+            intent.putExtra("productName",product.getName());
+            intent.putExtra("productDescription",product.getDescription());
+            intent.putExtra("image_url",product.getImage_url());
             mCtx.startActivity(intent);
-
+        }
         });
     }
 
@@ -56,7 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    static class ProductViewHolder extends RecyclerView.ViewHolder {
+     class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName, textViewDescription;
         ImageView imageView;
         RelativeLayout relativeLayout;

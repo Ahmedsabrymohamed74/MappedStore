@@ -81,6 +81,17 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnfavourites"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@color/btn_logut_bg"
+            android:text="@string/btn_fav"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
     </LinearLayout>
 
 

@@ -8,13 +8,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_register"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:background="@color/bg_register">
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/bg_register"
             android:clickable="true"
             android:contextClickable="true"
@@ -37,11 +37,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/shopName"
                 android:layout_alignStart="@+id/shopName"
-                android:textColor="@color/white"
-
                 android:layout_marginStart="0dp"
+
                 android:layout_marginTop="10dp"
                 android:text="@string/price_distance"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
 
             <TextView
@@ -49,13 +49,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/price_distance"
-                android:textColor="@color/white"
-
                 android:layout_alignStart="@+id/shopName"
+
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/special_offers"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/addtoFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/specialOffers"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="13dp"
+                android:text="@string/addTo"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/getDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/specialOffers"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="48dp"
+                android:layout_toStartOf="@+id/addtoFav"
+                android:text="@string/directions" />
 
         </RelativeLayout>
 

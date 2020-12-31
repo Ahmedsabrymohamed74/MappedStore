@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--Milestone 1-->
+    <!--Milestone 1-->
     <string name="app_name">Mapped Store</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -16,7 +16,7 @@
     <string name="name">Full name</string>
     <string name="btn_maps">To Maps</string>
 
-<!--Milestone 2-->
+    <!--Milestone 2-->
     <string name="btn_product">Products List</string>
     <string name="store">Store: </string>
     <string name="product_name">Product Name: </string>
@@ -29,6 +29,11 @@
     <string name="item">Item 1</string>
     <string name="price_distance">Price: 6500, Distance: 9.2 Km</string>
     <string name="btn_link_to_main">Back to Main Screen</string>
+    <string name="addTo">Favourite</string>
+    <string name="btn_fav">Favourites</string>
+    <string name="directions">Directions</string>
+    <string name="fav_delete">Remove from Favourites</string>
+    <string name="price">Price: </string>
 
     <string name="map_key" translatable="false">AIzaSyC64Orh7q6wThlM0rIWyOcjA8s7q5GUy8A</string>
 
