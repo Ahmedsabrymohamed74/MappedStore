@@ -1,7 +1,10 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,16 +37,19 @@ public class Favourites extends AppCompatActivity {
     SessionManager session;
     String email;
     String result = null;
+    private Button btnLinkToMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
+        btnLinkToMain = findViewById(R.id.btnLinkToMainScreen);
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         favList = new ArrayList<>();
-        loadFavourites();
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -55,7 +61,18 @@ public class Favourites extends AppCompatActivity {
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
         email = user.get("email");
+//        Log.i("tagconvertstr", "[" + result + "]");
+        loadFavourites();
 
+        btnLinkToMain.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
@@ -64,7 +81,7 @@ public class Favourites extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.i("tagconvertstr", "[" + result + "]");
+//                    Log.i("tagconvertstr", "[" + result + "]");
                     JSONArray favourites = new JSONArray(response);
                     for (int i = 0; i < favourites.length(); i++) {
                         JSONObject favouriteObject = favourites.getJSONObject(i);

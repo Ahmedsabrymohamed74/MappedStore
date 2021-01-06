@@ -28,7 +28,7 @@
     <string name="location">Locations: </string>
     <string name="item">Item 1</string>
     <string name="price_distance">Price: 6500, Distance: 9.2 Km</string>
-    <string name="btn_link_to_main">Back to Main Screen</string>
+    <string name="btn_link_to_pre">Back</string>
     <string name="addTo">Favourite</string>
     <string name="btn_fav">Favourites</string>
     <string name="directions">Directions</string>

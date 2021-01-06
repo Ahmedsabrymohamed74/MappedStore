@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     private String name;
     private String description;
     private String image_url;
-    private Button btnLinkToMain;
+    private Button btnLinkToList;
     private SQLiteHandler db;
     private SessionManager session;
 
@@ -61,31 +61,17 @@ public class DetailActivity extends AppCompatActivity {
         image_url = intent.getExtras().getString("image_url");
 
         productName = findViewById(R.id.productName);
+        btnLinkToList = findViewById(R.id.btnLinkToListScreen);
         productDescription = findViewById(R.id.productDescription);
         productImage = findViewById(R.id.productImage);
+        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        shopList = new ArrayList<>();
 
         productName.setText(name);
         productDescription.setText(description);
         Glide.with(getApplicationContext()).load(image_url).into(productImage);
-
-
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView2);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        shopList = new ArrayList<>();
-        loadShops();
-
-        btnLinkToMain = (Button) findViewById(R.id.btnLinkToMainScreen);
-
-        btnLinkToMain.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -93,11 +79,23 @@ public class DetailActivity extends AppCompatActivity {
         // session manager
         session = new SessionManager(getApplicationContext());
 
-
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
 
         email = user.get("email");
+
+        loadShops();
+
+        btnLinkToList.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        ListActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
 
     }
 
@@ -135,5 +133,6 @@ public class DetailActivity extends AppCompatActivity {
         });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
 
 }

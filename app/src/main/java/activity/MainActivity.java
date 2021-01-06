@@ -17,7 +17,6 @@ import java.util.HashMap;
 import helper.SQLiteHandler;
 import helper.SessionManager;
 
-//import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class MainActivity extends Activity {
 

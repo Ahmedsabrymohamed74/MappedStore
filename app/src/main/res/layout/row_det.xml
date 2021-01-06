@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_register"
+    android:scrollbarAlwaysDrawHorizontalTrack="true"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -21,9 +22,10 @@
             android:focusable="false"
             android:padding="8dp">
 
+
             <TextView
                 android:id="@+id/shopName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/shop_name"
@@ -31,18 +33,19 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/price_distance"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/shopName"
                 android:layout_alignStart="@+id/shopName"
                 android:layout_marginStart="0dp"
-
                 android:layout_marginTop="10dp"
                 android:text="@string/price_distance"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
+
 
             <TextView
                 android:id="@+id/specialOffers"
@@ -50,12 +53,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/price_distance"
                 android:layout_alignStart="@+id/shopName"
-
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="5dp"
                 android:text="@string/special_offers"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
+
 
             <Button
                 android:id="@+id/addtoFav"
